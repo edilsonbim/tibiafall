@@ -1,12 +1,13 @@
 local combat = Combat()
 combat:setParameter(COMBAT_PARAM_TYPE, COMBAT_ENERGYDAMAGE)
-combat:setParameter(COMBAT_PARAM_EFFECT, CONST_ME_ENERGYAREA)
-combat:setParameter(COMBAT_PARAM_DISTANCEEFFECT, CONST_ANI_ENERGY)
+combat:setParameter(COMBAT_PARAM_EFFECT, CONST_ME_ENERGYHIT)
+combat:setArea(createCombatArea(AREA_BEAM7, AREADIAGONAL_BEAM7))
+combat:setParameter(COMBAT_PARAM_AGGRESSIVE, 0)
 
 function onGetFormulaValues(player, level, maglevel)
-	local min = (level / 5) + (maglevel * 2.2) + 12
-	local max = (level / 5) + (maglevel * 3.4) + 21
-	return -min, -max
+    local min = maglevel*3+140
+    local max = maglevel*3+195
+    return -min, -max
 end
 
 combat:setCallback(CALLBACK_PARAM_LEVELMAGICVALUE, "onGetFormulaValues")
